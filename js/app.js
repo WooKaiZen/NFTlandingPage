@@ -1,12 +1,27 @@
+//import ERC721Mintable from '../../build/contracts/ERC721Mintable.json';
+//const { ERC721Mintable } = require('../../build/contracts/ERC721Mintable.json');
+/*const { Web3 } = require('web3');
+
+web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/8865033a87c9423ebc8ab20410bf8dd4'));
+window.Contract = new this.web3.eth.Contract(abi,0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198);*/
+if (window.ethereum) {
+  window.web3 = new Web3(window.ethereum);
+  checkChain();
+} else if (window.web3) {
+  window.web3 = new Web3(window.web3.currentProvider);
+}
+
 // METAMASK CONNECTION
 const TIMEOUT = 1000;
-const COLLECTION_NAME = 'CodeCats';
+const COLLECTION_NAME = 'FLUXN';
 let editions = [];
 let dots = 1;
+let mintedTokens = 0;
 
 window.addEventListener('DOMContentLoaded', () => {
   const onboarding = new MetaMaskOnboarding();
   const onboardButton = document.getElementById('connectWallet');
+  const mintButton = document.getElementById('mint');
   let accounts;
 
   const updateButton = async () => {
@@ -44,6 +59,18 @@ window.addEventListener('DOMContentLoaded', () => {
       updateButton();
     });
   }
+  
+  const mint = async () => {
+	  try {
+		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call();
+	  }
+	  catch(e) {
+		  console.log(e);
+	  }	  
+	  mintedTokens += 1;
+  };
+  
+  mintButton.onclick = mint();
 });
 
 const checkOwner = async (account) => {
@@ -78,15 +105,15 @@ function updateStatusText(isOwner, checking) {
   const statusText = document.querySelector('.owner-status');
   if(checking) {
     if(isOwner) {
-      statusText.innerText = `You do own ${COLLECTION_NAME}!! 😻 Let's see how many${renderDots(dots)}`;
+      statusText.innerText = `You do own ${COLLECTION_NAME}!! Let's see how many${renderDots(dots)}`;
     } else {
-      statusText.innerText = `Checking to see if you own any ${COLLECTION_NAME} 😻${renderDots(dots)}`;
+      statusText.innerText = `Checking to see if you own any ${COLLECTION_NAME} ${renderDots(dots)}`;
     }
   } else {
     if(isOwner) {
-      statusText.innerText = `You own ${editions.length} ${COLLECTION_NAME}!! 😻`;
+      statusText.innerText = `You own ${editions.length} ${COLLECTION_NAME}!! `;
     } else {
-      statusText.innerText = `You don't own any ${COLLECTION_NAME} 😿`;
+      statusText.innerText = `You don't own any ${COLLECTION_NAME} `;
     }
   }
   dots = dots === 3 ? 1 : dots + 1;
