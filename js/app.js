@@ -1,8 +1,8 @@
 //import ERC721Mintable from '../../build/contracts/ERC721Mintable.json';
 //const { ERC721Mintable } = require('../../build/contracts/ERC721Mintable.json');
-/*const { Web3 } = require('web3');
+const { Web3 } = require('web3');
 
-web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/8865033a87c9423ebc8ab20410bf8dd4'));
+/*web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/8865033a87c9423ebc8ab20410bf8dd4'));
 window.Contract = new this.web3.eth.Contract(abi,0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198);*/
 if (window.ethereum) {
   window.web3 = new Web3(window.ethereum);
