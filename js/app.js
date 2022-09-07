@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const onboarding = new MetaMaskOnboarding();
   const onboardButton = document.getElementById('connectWallet');
   const mintButton = document.getElementById('mint');
-  const DbgTxt = document.getElementById('TestMsgs');
+  const addressText = document.getElementById('addrId');
   let accounts;
   console.log(onboarding);
 
@@ -64,6 +64,13 @@ window.addEventListener('DOMContentLoaded', async () => {
 	};
 
 	MetaMaskClientCheck();
+	
+        mintButton.addEventListener('click', async () => {
+            //we use eth-accounts because it returns a list of addresses owned by us
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
+            //We take the first address in the array of addresses and display it
+            addressText.innerHTML = accounts[0] || 'Not able to get accounts';
+        });
 
   /*const updateButton = async () => {
     if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
