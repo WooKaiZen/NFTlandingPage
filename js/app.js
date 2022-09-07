@@ -1,74 +1,9 @@
-//import ERC721Mintable from '../../build/contracts/ERC721Mintable.json';
-//const { ERC721Mintable } = require('../../build/contracts/ERC721Mintable.json');
-/*const { Web3 } = require('web3');
-
-web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/8865033a87c9423ebc8ab20410bf8dd4'));*/
-
 // METAMASK CONNECTION
 const TIMEOUT = 1000;
 const COLLECTION_NAME = 'FLUXN';
 let editions = [];
 let dots = 1;
 let mintedTokens = 0;
-
-const { ethereum } = window;
-let metamaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
-console.log("Metamask installed:",metamaskInstalled);
-
-/*document.onreadystatechange = () => {
-  if (document.readyState == "complete") {
-    window.web3 = new Web3(window.ethereum);
-    console.log("WEB3:",window.web3);
-  }
-}*/
-
-//Created check function to see if the Metamask extension is installed
-const isMetaMaskInstalled = () => {
-	//Have to check the ethereum binding on the window object to see if it's installed
-	const { ethereum } = window;
-	return Boolean(ethereum && ethereum.isMetaMask);
-}
-
-//This will start the onboarding proccess
-const onClickInstall = () => {
-	onboardButton.innerText = 'Onboarding in progress';
-	onboardButton.disabled = true;
-	//On this object we have startOnboarding which will start the onboarding process for our end user
-	onboarding.startOnboarding();
-};
-
-const onClickConnect = async () => {
-	try {
-	  // Will open the MetaMask UI
-	  // You should disable this button while the request is pending!
-	  const provider = ethereum.providers.find((provider) => provider.isMetaMask);
-	  await provider.request({ method: 'eth_requestAccounts' });
-	} catch (error) {
-	  console.error(error);
-	}
-}
-
-const MetaMaskClientCheck = () => {
-	//Now we check to see if MetaMask is installed
-	if (!isMetaMaskInstalled()) {
-	  //If it isn't installed we ask the user to click to install it
-	  onboardButton.innerText = 'Click here to install MetaMask!';
-	  //When the button is clicked we call this function
-	  onboardButton.onclick = onClickInstall;
-	  //The button is now disabled
-	  onboardButton.disabled = true;  
-	  console.log("metamask not installed");   
-	} else {
-	  //If MetaMask is installed we ask the user to connect to their wallet
-	  onboardButton.innerText = 'Connect';
-	  //When the button is clicked we call this function to connect the users MetaMask Wallet
-	  onboardButton.onclick = onClickConnect;
-	  //The button is now enabled
-	  onboardButton.disabled = false;
-	}
-};
-
-MetaMaskClientCheck();
 
 window.addEventListener('DOMContentLoaded', async () => {
   const onboarding = new MetaMaskOnboarding();
@@ -78,37 +13,59 @@ window.addEventListener('DOMContentLoaded', async () => {
   let accounts;
   console.log(onboarding);
 
-  /*if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum);
-    checkChain();
-    console.log("window.ethereum");
-    DbgTxt.innerText = "window.ethereum";
-  } else if (window.web3) {
-    window.web3 = new Web3(window.web3.currentProvider);
-    console.log("window.web3");
-    DbgTxt.innerText = "window.web3";
-  } else {
-    //window.open("https://metamask.io/download/", "_blank");
-    DbgTxt.innerText = "none";
-  }*/
-  
-  /*if (window.web3) {
-    // Check if User is already connected by retrieving the accounts
-    try {
-      await window.web3.eth.getAccounts().then(async (addr) => {
-        accounts = addr;
-      });
-    }
-    catch(e) {
-      console.log(e);
-    }
-    window.Contract = new window.web3.eth.Contract(abi,0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198);
-  }
-  else {
-    console.log("Web3 not set up");
-  }*/
+	const { ethereum } = window;
+	let metamaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
+	console.log("Metamask installed:",metamaskInstalled);
 
-  const updateButton = async () => {
+	//Created check function to see if the Metamask extension is installed
+	const isMetaMaskInstalled = () => {
+		//Have to check the ethereum binding on the window object to see if it's installed
+		const { ethereum } = window;
+		return Boolean(ethereum && ethereum.isMetaMask);
+	}
+
+	//This will start the onboarding proccess
+	const onClickInstall = () => {
+		onboardButton.innerText = 'Onboarding in progress';
+		onboardButton.disabled = true;
+		//On this object we have startOnboarding which will start the onboarding process for our end user
+		onboarding.startOnboarding();
+	};
+
+	const onClickConnect = async () => {
+		try {
+		  // Will open the MetaMask UI
+		  // You should disable this button while the request is pending!
+		  const provider = ethereum.providers.find((provider) => provider.isMetaMask);
+		  await provider.request({ method: 'eth_requestAccounts' });
+		} catch (error) {
+		  console.error(error);
+		}
+	}
+
+	const MetaMaskClientCheck = () => {
+		//Now we check to see if MetaMask is installed
+		if (!isMetaMaskInstalled()) {
+		  //If it isn't installed we ask the user to click to install it
+		  onboardButton.innerText = 'Click here to install MetaMask!';
+		  //When the button is clicked we call this function
+		  onboardButton.onclick = onClickInstall;
+		  //The button is now disabled
+		  onboardButton.disabled = true;  
+		  console.log("metamask not installed");   
+		} else {
+		  //If MetaMask is installed we ask the user to connect to their wallet
+		  onboardButton.innerText = 'Connect';
+		  //When the button is clicked we call this function to connect the users MetaMask Wallet
+		  onboardButton.onclick = onClickConnect;
+		  //The button is now enabled
+		  onboardButton.disabled = false;
+		}
+	};
+
+	MetaMaskClientCheck();
+
+  /*const updateButton = async () => {
     if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
       onboardButton.innerText = 'Install MetaMask!';
       onboardButton.onclick = () => {
@@ -137,12 +94,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   };
 
   updateButton();
+  
   if (MetaMaskOnboarding.isMetaMaskInstalled()) {
     window.ethereum.on('accountsChanged', (newAccounts) => {
       accounts = newAccounts;
       updateButton();
     });
-  }
+  }*/
   
   const mint = async () => {
 	  try {
