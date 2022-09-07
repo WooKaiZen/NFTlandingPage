@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 	};
 
 	MetaMaskClientCheck();
-	
+	// TODO: remove to test minting
         mintButton.addEventListener('click', async () => {
             //we use eth-accounts because it returns a list of addresses owned by us
             const accounts = await ethereum.request({ method: 'eth_accounts' });
