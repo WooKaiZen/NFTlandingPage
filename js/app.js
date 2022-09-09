@@ -21,6 +21,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 	    window.web3 = new Web3(window.web3.currentProvider);
 	    console.log("web3:",window.web3);
 	  }
+	  else {
+	    console.log("no web3");
+	  }
 
 	//Created check function to see if the Metamask extension is installed
 	const isMetaMaskInstalled = () => {
