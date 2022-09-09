@@ -12,23 +12,18 @@ window.addEventListener('DOMContentLoaded', async () => {
   const addressText = document.getElementById('addrId');
   let accounts;
   console.log(onboarding);
-
-	  if (window.ethereum) {
-	    window.web3 = new Web3(window.ethereum);
-	    checkChain();
-	    console.log("ethereum:",window.web3);
-	  } else if (window.web3) {
-	    window.web3 = new Web3(window.web3.currentProvider);
-	    console.log("web3:",window.web3);
-	  }
-	  else {
-	    console.log("no web3");
-	  }
+	
+  const { ethereum } = window;
+  let metamaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
+  console.log("Metamask installed:",metamaskInstalled);
+	
+  const provider = ethereum.providers.find((provider) => provider.isMetaMask);
+  window.web3 = new Web3(provider);
+  console.log("web3:",window.web3);
 
 	//Created check function to see if the Metamask extension is installed
 	const isMetaMaskInstalled = () => {
 		//Have to check the ethereum binding on the window object to see if it's installed
-		const { ethereum } = window;
 		return Boolean(ethereum && ethereum.isMetaMask);
 	}
 
@@ -44,7 +39,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 		try {
 		  // Will open the MetaMask UI
 		  // You should disable this button while the request is pending!
-		  const provider = ethereum.providers.find((provider) => provider.isMetaMask);
+		  /*const provider = ethereum.providers.find((provider) => provider.isMetaMask);*/
 		  await provider.request({ method: 'eth_requestAccounts' });
 		} catch (error) {
 		  console.error(error);
