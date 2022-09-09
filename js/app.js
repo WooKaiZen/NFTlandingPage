@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  // Will open the MetaMask UI
 		  // You should disable this button while the request is pending!
 		  /*const provider = ethereum.providers.find((provider) => provider.isMetaMask);*/
-		  await provider.request({ method: 'eth_requestAccounts' });
+		  accounts = await provider.request({ method: 'eth_requestAccounts' });
 		} catch (error) {
 		  console.error(error);
 		}
