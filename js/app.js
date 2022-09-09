@@ -13,9 +13,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   let accounts;
   console.log(onboarding);
 
-	const { ethereum } = window;
-	let metamaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
-	console.log("Metamask installed:",metamaskInstalled);
+	  if (window.ethereum) {
+	    window.web3 = new Web3(window.ethereum);
+	    checkChain();
+	    console.log("ethereum:",window.web3);
+	  } else if (window.web3) {
+	    window.web3 = new Web3(window.web3.currentProvider);
+	    console.log("web3:",window.web3);
+	  }
 
 	//Created check function to see if the Metamask extension is installed
 	const isMetaMaskInstalled = () => {
