@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }*/
   
  // TODO: uncomment to test minting
-  /*const mint = async () => {
+ const mint = async () => {
 	  try {
 		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call();
 	  }
@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   };
   
   mintButton.onclick = mint();
-});*/
+});
 
 const checkOwner = async (account) => {
   if(account) {
