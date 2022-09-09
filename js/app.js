@@ -50,6 +50,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  // You should disable this button while the request is pending!
 		  /*const provider = ethereum.providers.find((provider) => provider.isMetaMask);*/
 		  accounts = await provider.request({ method: 'eth_requestAccounts' });
+		  console.log(accounts[0]);
+		  console.log(accounts[1]);
+		  console.log(accounts[2]);
 		} catch (error) {
 		  console.error(error);
 		}
