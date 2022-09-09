@@ -24,9 +24,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   /*const data = await ethereum.request({
     method: 'eth_getStorageAt',
     params: [ "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198" ],
-  })*/
+  })
   
-  console.log(data);
+  console.log(data);*/
 
 	//Created check function to see if the Metamask extension is installed
 	const isMetaMaskInstalled = () => {
