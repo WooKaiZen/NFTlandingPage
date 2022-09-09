@@ -80,12 +80,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 	MetaMaskClientCheck();
 	// TODO: remove to test minting
-        mintButton.addEventListener('click', async () => {
+        /*mintButton.addEventListener('click', async () => {
             //we use eth-accounts because it returns a list of addresses owned by us
             const accounts = await ethereum.request({ method: 'eth_accounts' });
             //We take the first address in the array of addresses and display it
             addressText.innerHTML = accounts[0] || 'Not able to get accounts';
-        });
+        });*/
 
   /*const updateButton = async () => {
     if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
@@ -128,6 +128,7 @@ window.addEventListener('DOMContentLoaded', async () => {
  const mint = async () => {
 	  try {
 		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call();
+		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
 		  console.log(e);
