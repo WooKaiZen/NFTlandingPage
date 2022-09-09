@@ -18,8 +18,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   console.log("Metamask installed:",metamaskInstalled);
 	
   const provider = ethereum.providers.find((provider) => provider.isMetaMask);
-  window.web3 = new Web3(provider);
-  console.log("web3:",window.web3);
+  /*window.web3 = new Web3(provider);
+  console.log("web3:",window.web3);*/
+	
+  const data = await ethereum.request({
+    method: 'eth_getStorageAt',
+    params: [ "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198" ],
+  })
+  
+  console.log(data);
 
 	//Created check function to see if the Metamask extension is installed
 	const isMetaMaskInstalled = () => {
