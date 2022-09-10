@@ -126,6 +126,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   
  // TODO: uncomment to test minting
  const mint = async () => {
+	  console.log("Minting");
 	  try {
 		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call();
 		addressText.innerHTML = "Minted token "+mintedTokens;
