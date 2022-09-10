@@ -142,7 +142,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 	
   mintButton.addEventListener('click', async () => {
 	  mint();
-  }
+  });
 });
 
 const checkOwner = async (account) => {
