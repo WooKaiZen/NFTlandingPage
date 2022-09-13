@@ -19,7 +19,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   console.log("Ethereum:",ethereum);
   console.log("Ethereum providers:",ethereum.providers);
 	
-  const provider = ethereum.providers.find((provider) => provider.isMetaMask);
+  //const provider = ethereum.providers.find((provider) => provider.isMetaMask);
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  console.log("Provider:",provider);
   window.web3 = new Web3(provider);
   console.log("web3:",window.web3);
 	
