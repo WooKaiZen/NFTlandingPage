@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const { ethereum } = window;
   let metamaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
   console.log("Metamask installed:",metamaskInstalled);
+  console.log("Ethereum providers:",ethereum.providers);
 	
   const provider = ethereum.providers.find((provider) => provider.isMetaMask);
   window.web3 = new Web3(provider);
