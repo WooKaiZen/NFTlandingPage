@@ -1,5 +1,3 @@
-import { ethers } from 'ethers';
-
 // METAMASK CONNECTION
 const TIMEOUT = 1000;
 const COLLECTION_NAME = 'FLUXN';
