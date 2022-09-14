@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   window.Contract = new web3.eth.Contract(abi, "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198");
   //window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);
   console.log("Contract methods:",window.Contract.methods);
+  console.log("Contract functions:",window.Contract.functions);
 	
   /*const data = await ethereum.request({
     method: 'eth_getStorageAt',
