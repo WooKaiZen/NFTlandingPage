@@ -27,9 +27,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   window.web3 = new Web3(provider);
   console.log("web3:",window.web3);
 	
-  //window.Contract = new web3.eth.Contract(abi, "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198");
-  window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);
+  window.Contract = new web3.eth.Contract(abi, "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198");
+  //window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);
   console.log("Contract methods:",window.Contract.methods);
+  const mint = await window.Contract.mint();
 	
   /*const data = await ethereum.request({
     method: 'eth_getStorageAt',
