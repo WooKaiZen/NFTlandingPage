@@ -19,6 +19,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   console.log("Ethereum:",ethereum);
   console.log("Ethereum providers:",ethereum.providers);
 	
+  //https://medium.com/coinmonks/compiling-deploying-and-interacting-with-smart-contract-using-javascript-641cf0342824
+  const wallet = new ethers.Wallet(config['private_key'] , provider); //TODO
   //const provider = ethereum.providers.find((provider) => provider.isMetaMask);
   const provider = new ethers.providers.Web3Provider(ethereum);
   console.log("Provider:",provider);
@@ -28,7 +30,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   console.log("web3:",window.web3);
 	
   window.Contract = new web3.eth.Contract(abi, "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198");
-  //window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);
+  //window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);//new ethers.Contract( address , abi , wallet );
   console.log("Contract methods:",window.Contract.methods);
   console.log("Contract functions:",window.Contract.functions);
 	
