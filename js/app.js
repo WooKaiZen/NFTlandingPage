@@ -144,7 +144,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  console.log("Minting");
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
-		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // TODO: function
+		await window.Contract.functions.mint(accounts[0],mintedTokens+1).call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
 		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
