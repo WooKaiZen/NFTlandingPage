@@ -144,8 +144,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  console.log("Minting");
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
-		estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas()//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
-		console.log("Estimated gas:",estimated_gas);
+		//estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas()//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
+		supply = await window.Contract.functions.totalSupply();
+		console.log("Total supply:",supply);
 		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
