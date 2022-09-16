@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   console.log("web3:",window.web3);
   const test_account = window.web3.eth.accounts.create();
   console.log("Test account :",test_account);
+  //https://medium.com/0xcode/interacting-with-smart-contracts-using-web3-js-34545a8a1ebd :
   const wallet = new ethers.Wallet(test_account.privateKey, provider); //TODO
   console.log("Wallet:",wallet);
 	
@@ -143,7 +144,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  console.log("Minting");
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
-		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000});
+		await window.Contract.methods.mint(accounts[0],mintedTokens+1).call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // TODO: function
 		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
