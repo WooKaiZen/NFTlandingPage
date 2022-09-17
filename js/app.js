@@ -23,20 +23,23 @@ window.addEventListener('DOMContentLoaded', async () => {
   //const provider = ethereum.providers.find((provider) => provider.isMetaMask);
   const provider = new ethers.providers.Web3Provider(ethereum);
   console.log("Provider:",provider);
-  const signer = provider.getSigner();
-  console.log("signer:",signer);
+  //https://ethereum.stackexchange.com/questions/120817/how-to-call-a-contract-function-method-using-ethersjs
+  /*const walletAddress = accounts[0];
+  const signer = provider.getSigner(walletAddress);
+  console.log("signer:",signer);*/
   window.web3 = new Web3(provider);
   console.log("web3:",window.web3);
-  const test_account = window.web3.eth.accounts.create();
-  console.log("Test account :",test_account);
+  /*const test_account = window.web3.eth.accounts.create();
+  console.log("Test account :",test_account);*/
   //https://medium.com/0xcode/interacting-with-smart-contracts-using-web3-js-34545a8a1ebd :
-  const wallet = new ethers.Wallet(test_account.privateKey, provider); //TODO
-  console.log("Wallet:",wallet);
+  //const wallet = new ethers.Wallet(test_account.privateKey, provider);
+  //alternative? https://www.quicknode.com/guides/web3-sdks/how-to-generate-a-new-ethereum-address-in-javascript
+  //console.log("Wallet:",wallet);
 	
   //window.Contract = new web3.eth.Contract(abi, "0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198");
-  window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,wallet);//new ethers.Contract( address , abi , wallet );
+  /*window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,wallet);//new ethers.Contract( address , abi , wallet );
   console.log("Contract methods:",window.Contract.methods);
-  console.log("Contract functions:",window.Contract.functions);
+  console.log("Contract functions:",window.Contract.functions);*/
 	
   /*const data = await ethereum.request({
     method: 'eth_getStorageAt',
@@ -67,7 +70,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  accounts = await ethereum.request({ method: 'eth_requestAccounts' }); //provider
 		  console.log(accounts[0]);
 		  console.log(accounts[1]);
-		  console.log(accounts[2]);
+		  const walletAddress = accounts[0];
+		  const signer = provider.getSigner(walletAddress);
+		  console.log("signer:",signer);
+		  window.Contract = new ethers.Contract("0xe01b36d8CC27A37644d0398dC3Cc54b8122c0198",abi,signer);
+		  console.log("Contract methods:",window.Contract.methods);
+		  console.log("Contract functions:",window.Contract.functions);
 		} catch (error) {
 		  console.error(error);
 		}
@@ -144,9 +152,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  console.log("Minting");
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
-		//estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas()//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
-		supply = await window.Contract.functions.totalSupply();
-		console.log("Total supply:",supply.toNumber());
+		estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas();//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
+		//supply = await window.Contract.functions.totalSupply();
+		//console.log("Total supply:",supply.toNumber());
 		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
