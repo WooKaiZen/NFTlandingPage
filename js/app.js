@@ -72,6 +72,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  accounts = await ethereum.request({ method: 'eth_requestAccounts' }); //provider
 		  console.log(accounts[0]);
 		  console.log(accounts[1]);
+		  accounts.push(0x8f5f71b18D1189D8087926B6bfD1001021872006);//TODO: fix
+		  console.log(accounts[1]);
 		  const walletAddress = accounts[0];
 		  const signer = provider.getSigner(walletAddress);
 		  console.log("signer:",signer);
@@ -157,7 +159,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  console.log("Minting");
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
-		estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas();//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
+		estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1);//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
 		mintedTokens = await window.Contract.functions.totalSupply();
 		mintedTokens = mintedTokens.toNumber();
 		console.log("Minted Tokens:",mintedTokens);
@@ -178,13 +180,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   const testContract = async() => {
 	  console.log("Testing");
 	  try {
-		  _removeTokenFromOwnerEnumeration(accounts[0],2);
-		  _removeTokenFromAllTokensEnumeration(2);
+		  await window.Contract.functions.safeTransferFrom(account[0],accounts[1],3);
 		  let newSupply = await window.Contract.functions.totalSupply();
 		  newSupply = newSupply.toNumber();
 		  console.log("Supply:",newSupply,mintedTokens);
-		  if (newSupply != mintedTokens-1) {
-			  console.log("Error: new supply should be decremented");
+		  if (newSupply != mintedTokens) {
+			  console.log("Error: new supply should equal minted tokens");
 		  }
 	  }
 	  catch(e) {
