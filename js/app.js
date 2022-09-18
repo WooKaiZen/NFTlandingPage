@@ -180,7 +180,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const testContract = async() => {
 	  console.log("Testing");
 	  try {
-		  await window.Contract.functions.safeTransferFrom(account[0],accounts[1],3);
+		  await window.Contract.functions.safeTransferFrom(accounts[0],accounts[1],3);
 		  let newSupply = await window.Contract.functions.totalSupply();
 		  newSupply = newSupply.toNumber();
 		  console.log("Supply:",newSupply,mintedTokens);
