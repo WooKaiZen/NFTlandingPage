@@ -152,7 +152,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
   }*/
   
- // TODO: uncomment to test minting
  const mint = async () => {
 	  console.log("Minting");
 	  try {
@@ -165,14 +164,30 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  catch(e) {
 		  console.log(e);
 	  }	  
-	  mintedTokens += 1;
+	  //mintedTokens += 1;
   };
   
   //mintButton.onclick = mint();
 	
-	
   mintButton.addEventListener('click', async () => {
 	  mint();
+  });
+	
+  const testContract = async() => {
+	  _removeTokenFromOwnerEnumeration(accounts[0],2);
+	  _removeTokenFromAllTokensEnumeration(2);
+	  let newSupply = await window.Contract.functions.totalSupply();
+	  console.log("Supply:",newSupply,mintedTokens);
+	  if (newSupply != mintedTokens-1) {
+		  console.log("Error: new supply should be decremented");
+	  }
+	  catch(e) {
+		  console.log(e);
+	  }
+  }
+  
+  testButton.addEventListener('click', async () => {
+	  testContract();
   });
 });
 
