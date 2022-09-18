@@ -174,12 +174,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 	
   const testContract = async() => {
-	  _removeTokenFromOwnerEnumeration(accounts[0],2);
-	  _removeTokenFromAllTokensEnumeration(2);
-	  let newSupply = await window.Contract.functions.totalSupply();
-	  console.log("Supply:",newSupply,mintedTokens);
-	  if (newSupply != mintedTokens-1) {
-		  console.log("Error: new supply should be decremented");
+	  console.log("Testing");
+	  try {
+		  _removeTokenFromOwnerEnumeration(accounts[0],2);
+		  _removeTokenFromAllTokensEnumeration(2);
+		  let newSupply = await window.Contract.functions.totalSupply();
+		  console.log("Supply:",newSupply,mintedTokens);
+		  if (newSupply != mintedTokens-1) {
+			  console.log("Error: new supply should be decremented");
+		  }
 	  }
 	  catch(e) {
 		  console.log(e);
