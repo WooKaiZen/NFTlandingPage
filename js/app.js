@@ -79,7 +79,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  console.log("Contract methods:",window.Contract.methods);
 		  console.log("Contract functions:",window.Contract.functions);
 		  // already minted tokens
-		  mintedTokens = await window.Contract.functions.totalSupply().toNumber();
+		  mintedTokens = await window.Contract.functions.totalSupply();
+		  mintedTokens = mintedTokens.toNumber();
 		  console.log("Minted Tokens:",mintedTokens);
 		} catch (error) {
 		  console.error(error);
@@ -157,8 +158,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  try {
 		console.log("Minting",mintedTokens+1,"by",accounts[0]);
 		estimated_gas = await window.Contract.functions.mint(accounts[0],mintedTokens+1).estimateGas();//.call({ from: accounts[0], gas: 4712388, gasPrice: 100000000000}); // methods
-		mintedTokens = await window.Contract.functions.totalSupply().toNumber();
-		console.log("Minted Tokens:",mintedTokens.toNumber());
+		mintedTokens = await window.Contract.functions.totalSupply();
+		mintedTokens = mintedTokens.toNumber();
+		console.log("Minted Tokens:",mintedTokens);
 		addressText.innerHTML = "Minted token "+mintedTokens;
 	  }
 	  catch(e) {
@@ -178,7 +180,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  try {
 		  _removeTokenFromOwnerEnumeration(accounts[0],2);
 		  _removeTokenFromAllTokensEnumeration(2);
-		  let newSupply = await window.Contract.functions.totalSupply().toNumber();
+		  let newSupply = await window.Contract.functions.totalSupply();
+		  newSupply = newSupply.toNumber();
 		  console.log("Supply:",newSupply,mintedTokens);
 		  if (newSupply != mintedTokens-1) {
 			  console.log("Error: new supply should be decremented");
