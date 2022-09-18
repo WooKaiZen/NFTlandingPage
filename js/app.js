@@ -10,6 +10,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   const onboardButton = document.getElementById('connectWallet');
   const mintButton = document.getElementById('mint');
   const addressText = document.getElementById('addrId');
+  const testButton = document.getElementById('test-btn');
+  const testText = document.getElementById('testId');
   let accounts;
   console.log(onboarding);
 	
