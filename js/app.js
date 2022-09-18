@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 		  accounts = await ethereum.request({ method: 'eth_requestAccounts' }); //provider
 		  console.log(accounts[0]);
 		  console.log(accounts[1]);
-		  accounts.push(0x8f5f71b18D1189D8087926B6bfD1001021872006);//TODO: fix
+		  accounts.push('0x8f5f71b18D1189D8087926B6bfD1001021872006');//TODO: fix
 		  console.log(accounts[1]);
 		  const walletAddress = accounts[0];
 		  const signer = provider.getSigner(walletAddress);
