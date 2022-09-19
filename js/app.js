@@ -180,12 +180,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   const testContract = async() => {
 	  console.log("Testing");
 	  try {
-		  await window.Contract.functions.safeTransferFrom(accounts[0],accounts[1],3);
+		  //await window.Contract.functions.safeTransferFrom(accounts[0],accounts[1],3);
+		  let balance1 = await window.Contract.functions.balanceOf(accounts[0]);
+		  console.log("Balance of account 1:",balance1);
+		  let balance2 = await window.Contract.functions.balanceOf(accounts[1]);
+		  console.log("Balance of account 2:",balance2);
 		  let newSupply = await window.Contract.functions.totalSupply();
 		  newSupply = newSupply.toNumber();
 		  console.log("Supply:",newSupply,mintedTokens);
-		  if (newSupply != mintedTokens) {
-			  console.log("Error: new supply should equal minted tokens");
+		  if (newSupply != balance1+balance2) {
+			  console.log("Error: new supply should equal sum of balances");
 		  }
 	  }
 	  catch(e) {
