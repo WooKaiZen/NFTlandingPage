@@ -182,8 +182,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 	  try {
 		  //await window.Contract.functions.safeTransferFrom(accounts[0],accounts[1],3);
 		  let balance1 = await window.Contract.functions.balanceOf(accounts[0]);
+		  balance1 = balance1.toNumber();
 		  console.log("Balance of account 1:",balance1);
 		  let balance2 = await window.Contract.functions.balanceOf(accounts[1]);
+		  balance2 = balance2.toNumber();
 		  console.log("Balance of account 2:",balance2);
 		  let newSupply = await window.Contract.functions.totalSupply();
 		  newSupply = newSupply.toNumber();
